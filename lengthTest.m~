@@ -1,0 +1,10 @@
+load('/Users/Ouyangzuokun/Documents/MATLAB/Projet_EchoGreen/RawData/chou_shorttouch/chou_shorttouch_12_raw_signal.mat');
+temp = find(rawData>1);
+length(temp)
+temp(length(temp)) - temp(1)
+%%
+load('/Users/Ouyangzuokun/Documents/MATLAB/Projet_EchoGreen/RawData/chou_longtouch/chou_longtouch_12_raw_signal.mat');
+temp = find(rawData>1);
+length(temp)
+temp(length(temp)) - temp(1)
+%%
