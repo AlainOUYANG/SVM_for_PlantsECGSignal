@@ -1,7 +1,7 @@
 tic; clc; clear; close all;
 
 %% Calculate the max of each rawData and save as the dataset with corresopding labels
-
+fprintf('SVM test for water & shorttouch\n');
 dataNum = 200;
 data = zeros(dataNum, 2);
 label = ones(dataNum, 1); % label = 1, it's long touch; label = -1, it's short touch
@@ -15,6 +15,9 @@ for i=1:dataNum
 
         % %calculate the maximum of each rawData, if max > 1, label = 1, else, label = -1
         temp = find(rawData>0.8);
+        if length(temp) == 0
+            continue;
+        end
         data(i, 1) = max(rawData);
         data(i, 2) = temp(length(temp)) - temp(1);
         label(i) = 1;
@@ -42,6 +45,7 @@ model
 % nSV = model.nSV 
 
 %% Use trained model to see its effect on the classification of the training set
+fprintf('Accuracy for trained data: 100 water + 100 shorttouch\n');
 [ptrain] = svmpredict(label, data, model);
 
 %% Predict test data
@@ -69,7 +73,10 @@ for i=1:testNum
         load(dataName);
 
         % calculate the maximum of each rawData, if max > 1, label = 1, else, label = -1
-        temp = find(rawData>0.5);
+        temp = find(rawData>0.8);
+        if length(temp) == 0
+            break;
+        end
         testdata(i, 1) = max(rawData);
         testdata(i, 2) = temp(length(temp)) - temp(1);
         testlabel(i) = 1;
@@ -86,6 +93,7 @@ for i=1:testNum
     end
 end
 
+fprintf('Accuracy for test data: 50 water + 50 shorttouch\n');
 [ptest] = svmpredict(testlabel, testdata, model);
 
 % ptest

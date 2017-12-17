@@ -1,7 +1,7 @@
 tic; clc; clear; close all;
 
 %% Calculate the max of each rawData and save as the dataset with corresopding labels
-
+fprintf('SVM test for longtouch & shorttouch\n');
 dataNum = 200;
 data = zeros(dataNum, 2);
 label = ones(dataNum, 1); % label = 1, it's long touch; label = -1, it's short touch
@@ -42,6 +42,7 @@ model
 % nSV = model.nSV 
 
 %% Use trained model to see its effect on the classification of the training set
+fprintf('Accuracy for trained data: 100 longtouch + 100 shorttouch\n');
 [ptrain] = svmpredict(label, data, model);
 
 %% Predict test data
@@ -86,6 +87,7 @@ for i=1:testNum
     end
 end
 
+fprintf('Accuracy for test data: 50 longtouch + 50 shorttouch\n');
 [ptest] = svmpredict(testlabel, testdata, model);
 
 % ptest
